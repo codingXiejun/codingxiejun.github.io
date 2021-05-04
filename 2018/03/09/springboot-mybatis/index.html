@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="项目介绍使用SpringBoot集成Mybatis，并使用Mybatis Generator工具自动生成dao、mapper、modal代码，已上传至Github，下载地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot——整合Mybatis">
+<meta property="og:url" content="http://example.com/2018/03/09/springboot-mybatis/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="项目介绍使用SpringBoot集成Mybatis，并使用Mybatis Generator工具自动生成dao、mapper、modal代码，已上传至Github，下载地址">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/110701.png">
+<meta property="og:image" content="http://example.com/img/110702.png">
+<meta property="og:image" content="http://example.com/img/110703.png">
+<meta property="og:image" content="http://example.com/img/110704.png">
+<meta property="og:image" content="http://example.com/img/110705.png">
+<meta property="og:image" content="http://example.com/img/110706.png">
+<meta property="og:image" content="http://example.com/img/110707.png">
+<meta property="og:image" content="http://example.com/img/110708.png">
+<meta property="og:image" content="http://example.com/img/110709.png">
+<meta property="og:image" content="http://example.com/img/110710.png">
+<meta property="og:image" content="http://example.com/img/110711.png">
+<meta property="og:image" content="http://example.com/img/110712.png">
+<meta property="article:published_time" content="2018-03-09T09:51:13.000Z">
+<meta property="article:modified_time" content="2018-11-19T03:21:57.015Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="utils">
+<meta property="article:tag" content="mybatis">
+<meta property="article:tag" content="springboot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/110701.png">
+
+<link rel="canonical" href="http://example.com/2018/03/09/springboot-mybatis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SpringBoot——整合Mybatis | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/09/springboot-mybatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot——整合Mybatis
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-03-09 17:51:13" itemprop="dateCreated datePublished" datetime="2018-03-09T17:51:13+08:00">2018-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-11-19 11:21:57" itemprop="dateModified" datetime="2018-11-19T11:21:57+08:00">2018-11-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>使用SpringBoot集成Mybatis，并使用<code>Mybatis Generator</code>工具自动生成dao、mapper、modal代码，已上传至Github，<a target="_blank" rel="noopener" href="https://github.com/codingXiejun/SpringBootStudy/blob/master/springboot-mybatis.zip">下载地址</a></p>
+<span id="more"></span>
+<hr>
+<h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><h2 id="项目创建"><a href="#项目创建" class="headerlink" title="项目创建"></a>项目创建</h2><p>第一种方法：<a target="_blank" rel="noopener" href="https://start.spring.io/">Springboot官网</a>下载搭建好的项目,需要导入web和mybatis两个依赖<br>第二种方法：elipse -&gt; file -&gt; new -&gt; Spring Starter Project<br><img src="/img/110701.png" alt="创建项目"><br><img src="/img/110702.png" alt="创建项目"><br>next -&gt; finish</p>
+<p>创建controller包 -&gt; 编写测试 -&gt;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">public class UserController &#123;</span><br><span class="line">	</span><br><span class="line">	@RequestMapping(value=<span class="string">&quot;/hello&quot;</span>)</span><br><span class="line">	public String <span class="function"><span class="title">hello</span></span>() &#123;</span><br><span class="line">		<span class="built_in">return</span> <span class="string">&quot;build success!&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行主函数 -&gt; 浏览器输入<a href="localhost:8080/hello">localhost:8080/hello</a><br><img src="/img/110703.png" alt="测试连接"><br>连接成功！</p>
+<h2 id="修改目录结构"><a href="#修改目录结构" class="headerlink" title="修改目录结构"></a>修改目录结构</h2><p>继续创建dao、model、service、service.impl包，并在<code>/src/main/resources</code>下创建mappers文件夹用来存放mapper<br><img src="/img/110704.png" alt="创建目录"></p>
+<h2 id="mysql创建数据库、数据表"><a href="#mysql创建数据库、数据表" class="headerlink" title="mysql创建数据库、数据表"></a>mysql创建数据库、数据表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">win+R </span><br><span class="line">-&gt; mysql -u root -p </span><br><span class="line">-&gt; CREATE DATABASE springboot_mybatis CHARACTER SET utf8 COLLATE utf8_general_ci; </span><br><span class="line">-&gt; USE springboot_mybatis;</span><br><span class="line">-&gt; CREATE TABLE user(</span><br><span class="line">int id(10) PRIMARY KEY NOT NULL,</span><br><span class="line">name varchar(20) NOT NULL,</span><br><span class="line">sex varchar(10) NOT NULL,</span><br><span class="line">age int(10) NOT NULL,</span><br><span class="line">address varchar(255) NOT NULL)ENGINE=InnoDB;</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载Mybatis-Generator工具"><a href="#下载Mybatis-Generator工具" class="headerlink" title="下载Mybatis Generator工具"></a>下载Mybatis Generator工具</h2><p>Help -&gt; Eclipse User Storage -&gt; Open Marketplaces Favorites -&gt;search -&gt; Mytabis Generator -&gt; Install<br><img src="/img/110705.png" alt="安装Mybatis Generator"></p>
+<h2 id="配置pom-xml仓库"><a href="#配置pom-xml仓库" class="headerlink" title="配置pom.xml仓库"></a>配置pom.xml仓库</h2><p>除了创建时添加的依赖外，我们还需要添加一个Mybatis Generater的依赖，依赖配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;!-- Web --&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;!-- Test --&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">		&lt;scope&gt;<span class="built_in">test</span>&lt;/scope&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;!-- MySQL --&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;5.1.47&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;!-- Mybatis --&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;!-- Mybatis Generator --&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>在<code>&lt;build&gt;</code>这个节点的<code>&lt;plugins&gt;</code>节点内部加入一个<code>&lt;plugin&gt;</code>，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">			&lt;configuration&gt;</span><br><span class="line">				&lt;!-- 是否显示详细配置信息 --&gt;</span><br><span class="line">				&lt;verbose&gt;<span class="literal">true</span>&lt;/verbose&gt;</span><br><span class="line">				&lt;!-- 是否重写以前的类文件和配置文件 --&gt;</span><br><span class="line">				&lt;overwrite&gt;<span class="literal">true</span>&lt;/overwrite&gt;</span><br><span class="line">			&lt;/configuration&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置application-properties"><a href="#配置application-properties" class="headerlink" title="配置application.properties"></a>配置application.properties</h2><p><code>application.properties</code>是项目的配置文件，由于这个插件不能从SpringBoot中获取到<code>mysql-connector-java.jar</code>,需要手动添加，在<code>application.properties</code>上配置你的jar路径，注意格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#JDBC Config</span></span><br><span class="line">spring.datasource.driverLocation=D:\\mysql-connector-java-5.1.47\\mysql-connector-java-5.1.47.jar</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/springbootshiro?useUnicode=<span class="literal">true</span>&amp;characterEncoding=utf8</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=123456</span><br><span class="line">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</span><br><span class="line"><span class="comment"># MyBatis Config</span></span><br><span class="line">mybatis.typeAliasesPackage=org.spring.springboot.domain</span><br><span class="line">mybatis.mapperLocations=classpath:mappers/*.xml</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建generatorConfig-xml"><a href="#创建generatorConfig-xml" class="headerlink" title="创建generatorConfig.xml"></a>创建generatorConfig.xml</h2><p>该文件用来配置需要自动生成的文件以及生成文件的路径和格式等，文件代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC <span class="string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span><br><span class="line">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">	&lt;!--导入属性配置 --&gt;</span><br><span class="line">	&lt;properties resource=<span class="string">&quot;application.properties&quot;</span>&gt;&lt;/properties&gt;</span><br><span class="line">	&lt;!-- 指定数据库驱动的jdbc驱动jar包的位置 --&gt;</span><br><span class="line">	&lt;classPathEntry location=<span class="string">&quot;<span class="variable">$&#123;spring.datasource.driverLocation&#125;</span>&quot;</span> /&gt;</span><br><span class="line">	&lt;!-- context 是逆向工程的主要配置信息 --&gt;</span><br><span class="line">	&lt;!-- id：起个名字 --&gt;</span><br><span class="line">	&lt;!-- targetRuntime：设置生成的文件适用于那个 mybatis 版本 --&gt;</span><br><span class="line">	&lt;context id=<span class="string">&quot;default&quot;</span> targetRuntime=<span class="string">&quot;MyBatis3&quot;</span>&gt;</span><br><span class="line">		&lt;!--jdbc的数据库连接 --&gt;</span><br><span class="line">		&lt;jdbcConnection driverClass=<span class="string">&quot;<span class="variable">$&#123;spring.datasource.driverName&#125;</span>&quot;</span></span><br><span class="line">			connectionURL=<span class="string">&quot;<span class="variable">$&#123;spring.datasource.url&#125;</span>&quot;</span> userId=<span class="string">&quot;<span class="variable">$&#123;spring.datasource.username&#125;</span>&quot;</span></span><br><span class="line">			password=<span class="string">&quot;<span class="variable">$&#123;spring.datasource.password&#125;</span>&quot;</span>&gt;</span><br><span class="line">		&lt;/jdbcConnection&gt;</span><br><span class="line">		&lt;!-- targetPackage：生成的实体类所在的包 --&gt;</span><br><span class="line">		&lt;!-- targetProject：生成的实体类所在的硬盘位置 --&gt;</span><br><span class="line">		&lt;javaModelGenerator targetPackage=<span class="string">&quot;com.codingxiejun.model&quot;</span></span><br><span class="line">			targetProject=<span class="string">&quot;.\src\main\java&quot;</span>&gt;</span><br><span class="line">			&lt;!-- 是否允许子包 --&gt;</span><br><span class="line">			&lt;property name=<span class="string">&quot;enableSubPackages&quot;</span> value=<span class="string">&quot;false&quot;</span> /&gt;</span><br><span class="line">			&lt;!-- 是否对modal添加构造函数 --&gt;</span><br><span class="line">			&lt;property name=<span class="string">&quot;constructorBased&quot;</span> value=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line">			&lt;!-- 是否清理从数据库中查询出的字符串左右两边的空白字符 --&gt;</span><br><span class="line">			&lt;property name=<span class="string">&quot;trimStrings&quot;</span> value=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line">			&lt;!-- 建立modal对象是否不可改变 即生成的modal对象不会有setter方法，只有构造方法 --&gt;</span><br><span class="line">			&lt;property name=<span class="string">&quot;immutable&quot;</span> value=<span class="string">&quot;false&quot;</span> /&gt;</span><br><span class="line">		&lt;/javaModelGenerator&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- targetPackage 和 targetProject：生成的 mapper 文件的包和位置 --&gt;</span><br><span class="line">		&lt;sqlMapGenerator targetPackage=<span class="string">&quot;mappers&quot;</span></span><br><span class="line">			targetProject=<span class="string">&quot;.\src\main\resources&quot;</span>&gt;</span><br><span class="line">			&lt;!-- 针对数据库的一个配置，是否把 schema 作为字包名 --&gt;</span><br><span class="line">			&lt;property name=<span class="string">&quot;enableSubPackages&quot;</span> value=<span class="string">&quot;false&quot;</span> /&gt;</span><br><span class="line">		&lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- targetPackage 和 targetProject：生成的 interface 文件的包和位置 --&gt;</span><br><span class="line">		&lt;javaClientGenerator <span class="built_in">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span></span><br><span class="line">			targetPackage=<span class="string">&quot;com.codingxiejun.dao&quot;</span> targetProject=<span class="string">&quot;.\src\main\java&quot;</span>&gt;</span><br><span class="line">			&lt;!-- 针对 oracle 数据库的一个配置，是否把 schema 作为字包名 --&gt;</span><br><span class="line">			&lt;property name=<span class="string">&quot;enableSubPackages&quot;</span> value=<span class="string">&quot;false&quot;</span> /&gt;</span><br><span class="line">		&lt;/javaClientGenerator&gt;</span><br><span class="line">		&lt;!-- 生成的 实体类 的数据库表名和生成的类名 --&gt;</span><br><span class="line">		&lt;table tableName=<span class="string">&quot;user&quot;</span> domainObjectName=<span class="string">&quot;User&quot;</span></span><br><span class="line">			enableCountByExample=<span class="string">&quot;false&quot;</span> enableUpdateByExample=<span class="string">&quot;false&quot;</span></span><br><span class="line">			enableDeleteByExample=<span class="string">&quot;false&quot;</span> enableSelectByExample=<span class="string">&quot;false&quot;</span></span><br><span class="line">			selectByExampleQueryId=<span class="string">&quot;false&quot;</span>&gt;</span><br><span class="line">		&lt;/table&gt;</span><br><span class="line">	&lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>到这里就搭建完成了，一共需要配置三个文件，application.properties、generatorConfig.xml和pom.xml</p>
+<h2 id="运行插件"><a href="#运行插件" class="headerlink" title="运行插件"></a>运行插件</h2><p>右击项目 -&gt; Run as -&gt; Run Configurations… -&gt; Maven Build -&gt; generatorProject<br><img src="/img/110706.png" alt="Run Configurations"><br>我们只需要填写Goals：mybatis-generator:generate就行,然后点击Run！<br><img src="/img/110707.png" alt="Run Configurations"><br>生成文件后目录：<br><img src="/img/110708.png" alt="目录"></p>
+<h2 id="修改main方法"><a href="#修改main方法" class="headerlink" title="修改main方法"></a>修改main方法</h2><p>在main方法添加注释：<code>@MapperScan(&quot;com.codingxiejun.dao&quot;)</code><br>在main方法加了<code>@MapperScan</code>后就不用在Mapper类中加<code>@Mapper</code>注释了，避免报错</p>
+<h2 id="编写Service类"><a href="#编写Service类" class="headerlink" title="编写Service类"></a>编写Service类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.codingxiejun.service;</span><br><span class="line"></span><br><span class="line">import com.codingxiejun.model.User;</span><br><span class="line"></span><br><span class="line">public interface UserService &#123;</span><br><span class="line">	int deleteByPrimaryKey(Integer id);</span><br><span class="line"></span><br><span class="line">    int insert(User record);</span><br><span class="line"></span><br><span class="line">    int insertSelective(User record);</span><br><span class="line"></span><br><span class="line">    User selectByPrimaryKey(Integer id);</span><br><span class="line"></span><br><span class="line">    int updateByPrimaryKeySelective(User record);</span><br><span class="line"></span><br><span class="line">    int updateByPrimaryKey(User record);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写ServiceImpl类实现Service"><a href="#编写ServiceImpl类实现Service" class="headerlink" title="编写ServiceImpl类实现Service"></a>编写ServiceImpl类实现Service</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.codingxiejun.service.impl;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import com.codingxiejun.dao.UserMapper;</span><br><span class="line">import com.codingxiejun.model.User;</span><br><span class="line">import com.codingxiejun.service.UserService;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class UserServiceImpl implements UserService &#123;</span><br><span class="line"></span><br><span class="line">	@Autowired</span><br><span class="line">	UserMapper userMapper;</span><br><span class="line">	</span><br><span class="line">	public int deleteByPrimaryKey(Integer id) &#123;</span><br><span class="line">		<span class="built_in">return</span> userMapper.deleteByPrimaryKey(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int insert(User record) &#123;</span><br><span class="line">		<span class="built_in">return</span> userMapper.insert(record);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int insertSelective(User record) &#123;</span><br><span class="line">		<span class="built_in">return</span> 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public User selectByPrimaryKey(Integer id) &#123;</span><br><span class="line">		<span class="built_in">return</span> userMapper.selectByPrimaryKey(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int updateByPrimaryKeySelective(User record) &#123;</span><br><span class="line">		<span class="built_in">return</span> userMapper.updateByPrimaryKeySelective(record);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int updateByPrimaryKey(User record) &#123;</span><br><span class="line">		<span class="built_in">return</span> userMapper.updateByPrimaryKey(record);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Junit单元测试"><a href="#Junit单元测试" class="headerlink" title="Junit单元测试"></a>Junit单元测试</h2><p>在<code>src/test/java</code>下新建一个测试类TestMybatis放在<code>com.xxxx.test</code>包下</p>
+<p>编写测试用例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package com.codingxiejun.test;</span><br><span class="line"></span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line">import com.codingxiejun.model.User;</span><br><span class="line">import com.codingxiejun.service.UserService;</span><br><span class="line"></span><br><span class="line">@SpringBootTest</span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">public class TestMybatis &#123;</span><br><span class="line"></span><br><span class="line">	@Autowired</span><br><span class="line">	UserService service;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testSelect</span></span>() &#123;</span><br><span class="line">		System.out.println(service.selectByPrimaryKey(1).toString());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testInsert</span></span>() &#123;</span><br><span class="line">		User user = new User(4,<span class="string">&quot;wangwu&quot;</span>,<span class="string">&quot;男&quot;</span>,35,<span class="string">&quot;重庆&quot;</span>);</span><br><span class="line">		System.out.println(service.insert(user));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testUpdate</span></span>() &#123;</span><br><span class="line">		User user = new User(4,<span class="string">&quot;wangwu&quot;</span>,<span class="string">&quot;男&quot;</span>,35,<span class="string">&quot;广州&quot;</span>);</span><br><span class="line">		System.out.println(service.updateByPrimaryKey(user));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Test</span><br><span class="line">	public void <span class="function"><span class="title">testDelete</span></span>() &#123;</span><br><span class="line">		System.out.println(service.deleteByPrimaryKey(4));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行后结果如下：</p>
+<ul>
+<li>查询<br><img src="/img/110709.png" alt="查询结果"></li>
+<li>插入<br><img src="/img/110710.png" alt="插入结果"></li>
+<li>修改<br><img src="/img/110711.png" alt="修改结果"></li>
+<li>删除<br><img src="/img/110712.png" alt="删除结果"></li>
+</ul>
+<p>到这里SpringBoot整合Mybatis完成~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/utils/" rel="tag"># utils</a>
+              <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+              <a href="/tags/springboot/" rel="tag"># springboot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/06/springboot-first/" rel="prev" title="SpringBoot——Hello SpringBoot">
+      <i class="fa fa-chevron-left"></i> SpringBoot——Hello SpringBoot
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/05/21/MybatisParamsSearch/" rel="next" title="Mybatis多参数查询">
+      Mybatis多参数查询 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">项目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">项目搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">项目创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">修改目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">mysql创建数据库、数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDMybatis-Generator%E5%B7%A5%E5%85%B7"><span class="nav-number">2.4.</span> <span class="nav-text">下载Mybatis Generator工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEpom-xml%E4%BB%93%E5%BA%93"><span class="nav-number">2.5.</span> <span class="nav-text">配置pom.xml仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEapplication-properties"><span class="nav-number">2.6.</span> <span class="nav-text">配置application.properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAgeneratorConfig-xml"><span class="nav-number">2.7.</span> <span class="nav-text">创建generatorConfig.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%8F%92%E4%BB%B6"><span class="nav-number">2.8.</span> <span class="nav-text">运行插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9main%E6%96%B9%E6%B3%95"><span class="nav-number">2.9.</span> <span class="nav-text">修改main方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99Service%E7%B1%BB"><span class="nav-number">2.10.</span> <span class="nav-text">编写Service类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99ServiceImpl%E7%B1%BB%E5%AE%9E%E7%8E%B0Service"><span class="nav-number">2.11.</span> <span class="nav-text">编写ServiceImpl类实现Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">2.12.</span> <span class="nav-text">Junit单元测试</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

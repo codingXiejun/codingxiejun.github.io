@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言正则表达式在平时经常需要用到，比如写前端页面的登录和注册验证时，需要检验输入是否合法，防止sql注入，比如：  帐号只能为字母和数字12345var username &#x3D; document.getElementById(&quot;username&quot;).value();var reg &#x3D; &#x2F;^[0-9a-zA-Z]*$&#x2F;g;if(!reg.test(username))&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://example.com/2018/08/20/RegularExpression/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言正则表达式在平时经常需要用到，比如写前端页面的登录和注册验证时，需要检验输入是否合法，防止sql注入，比如：  帐号只能为字母和数字12345var username &#x3D; document.getElementById(&quot;username&quot;).value();var reg &#x3D; &#x2F;^[0-9a-zA-Z]*$&#x2F;g;if(!reg.test(username))&amp;#123;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/032001.png">
+<meta property="article:published_time" content="2018-08-20T15:44:25.000Z">
+<meta property="article:modified_time" content="2018-11-21T08:06:27.137Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Regular Expression">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/032001.png">
+
+<link rel="canonical" href="http://example.com/2018/08/20/RegularExpression/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>正则表达式 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/20/RegularExpression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          正则表达式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-20 23:44:25" itemprop="dateCreated datePublished" datetime="2018-08-20T23:44:25+08:00">2018-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-11-21 16:06:27" itemprop="dateModified" datetime="2018-11-21T16:06:27+08:00">2018-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>正则表达式在平时经常需要用到，比如写前端页面的登录和注册验证时，需要检验输入是否合法，防止sql注入，比如：</p>
+<ul>
+<li>帐号只能为字母和数字<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var username = document.getElementById(<span class="string">&quot;username&quot;</span>).value();</span><br><span class="line">var reg = /^[0-9a-zA-Z]*$/g;</span><br><span class="line"><span class="keyword">if</span>(!reg.test(username))&#123;</span><br><span class="line">	alert(<span class="string">&quot;请输入正确的用户名&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+还有一次，公司的甲方需要我们提供源代码，其中包含了几万行C++代码和大量注释，为了不暴露公司的核心技术，公司让让我在一个下午之内<br>删除所有注释，听起来工程十分浩大，几百个文件，几千行注释，但是用正则表达式就可以轻松解决，清除注释的三种形式：</li>
+</ul>
+<ol>
+<li>//xxxx<pre><code> //.*
+</code></pre>
+</li>
+<li>/*xxxx*/<pre><code> //[\s\S]*?\n
+</code></pre>
+</li>
+<li>/*xxxx<br>  *xxxx<br>  */<pre><code> /\*&#123;1,2&#125;[\s\S]*?\*/
+</code></pre>
+只需使用<code>Editplus++</code>打开所有文件，<code>Ctrl+F</code>，一次输入三条正则表达式然后替换所有文件就行，如图:<br><img src="/img/032001.png" alt="清除注释"><br>时间用了大概十分钟就解决了。</li>
+</ol>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））<br>操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字<br>符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。正则表达式是一种文本模式，模式描述<br>在搜索文本时要匹配的一个或多个字符串。</p>
+<!-- more -->
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ol>
+<li>灵活性、逻辑性和功能性非常强；</li>
+<li>可以迅速地用极简单的方式达到字符串的复杂控制。</li>
+</ol>
+<h1 id="语法-来自百度百科"><a href="#语法-来自百度百科" class="headerlink" title="语法(来自百度百科)"></a>语法(来自百度百科)</h1><table>
+<thead>
+<tr>
+<th align="center">元字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">|将下一个字符标记符、或一个向后引用、或一个八进制转义符。例如，“\n”匹配\n。“\n”匹配换行符。序列“\”匹配“\”而“(”则匹配“(”。即相当于多种编程语言中都有的“转义字符”的概念。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="left">匹配输入字符串的开始位置。如果设置了RegExp对象的Multiline属性，^也匹配“\n”或“\r”之后的位置。</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="left">匹配输入字符串的结束位置。如果设置了RegExp对象的Multiline属性，$也匹配“\n”或“\r”之前的位置。</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="left">匹配前面的子表达式任意次。例如，zo<em>能匹配“z”，“zo”以及“zoo”。</em>等价于{0,}。</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="left">匹配前面的子表达式一次或多次(大于等于1次）。例如，“zo+”能匹配“zo”以及“zoo”，但不能匹配“z”。+等价于{1,}。</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="left">匹配前面的子表达式零次或一次。例如，“do(es)?”可以匹配“do”或“does”中的“do”。?等价于{0,1}。</td>
+</tr>
+<tr>
+<td align="center">{n}</td>
+<td align="left">n是一个非负整数。匹配确定的n次。例如，“o{2}”不能匹配“Bob”中的“o”，但是能匹配“food”中的两个o。</td>
+</tr>
+<tr>
+<td align="center">{n,}</td>
+<td align="left">n是一个非负整数。至少匹配n次。例如，“o{2,}”不能匹配“Bob”中的“o”，但能匹配“foooood”中的所有o。“o{1,}”等价于“o+”。“o{0,}”则等价于“o*”。</td>
+</tr>
+<tr>
+<td align="center">{n,m}</td>
+<td align="left">m和n均为非负整数，其中n&lt;=m。最少匹配n次且最多匹配m次。例如，“o{1,3}”将匹配“fooooood”中的前三个o。“o{0,1}”等价于“o?”。请注意在逗号和两个数之间不能有空格。</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="left">当该字符紧跟在任何一个其他限制符（*,+,?，{n}，{n,}，{n,m}）后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串“oooo”，“o+?”将匹配单个“o”，而“o+”将匹配所有“o”。</td>
+</tr>
+<tr>
+<td align="center">.点</td>
+<td align="left">匹配除“\r\n”之外的任何单个字符。要匹配包括“\r\n”在内的任何字符，请使用像“[\s\S]”的模式。</td>
+</tr>
+<tr>
+<td align="center">(pattern)</td>
+<td align="left">匹配pattern并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript中使用SubMatches集合，在JScript中则使用$0…$9属性。要匹配圆括号字符，请使用“(”或“)”。</td>
+</tr>
+<tr>
+<td align="center">(?:pattern)</td>
+<td align="left">匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用或字符“(&#124;)”来组合一个模式的各个部分是很有用。例如“industr(?:y&#124;ies)”就是一个比“industry&#124;industries”更简略的表达式。</td>
+</tr>
+<tr>
+<td align="center">(?=pattern)</td>
+<td align="left">正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，“Windows(?=95&#124;98&#124;NT&#124;2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>
+</tr>
+<tr>
+<td align="center">(?!pattern)</td>
+<td align="left">正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如“Windows(?!95&#124;98&#124;NT&#124;2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</td>
+</tr>
+<tr>
+<td align="center">(?&lt;=pattern)</td>
+<td align="left">反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95&#124;98&#124;NT&#124;2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。</td>
+</tr>
+<tr>
+<td align="center">(?&lt;!pattern)</td>
+<td align="left">反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95&#124;98&#124;NT&#124;2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。</td>
+</tr>
+<tr>
+<td align="center">x&#124;y</td>
+<td align="left">匹配x或y。例如，“z&#124;food”能匹配“z”或“food”或”zood”(此处请谨慎)。“(z&#124;f)ood”则匹配“zood”或“food”。</td>
+</tr>
+<tr>
+<td align="center">[xyz]</td>
+<td align="left">字符集合。匹配所包含的任意一个字符。例如，“[abc]”可以匹配“plain”中的“a”。</td>
+</tr>
+<tr>
+<td align="center">[^xyz]</td>
+<td align="left">负值字符集合。匹配未包含的任意字符。例如，“[^abc]”可以匹配“plain”中的“plin”。</td>
+</tr>
+<tr>
+<td align="center">[a-z]</td>
+<td align="left">字符范围。匹配指定范围内的任意字符。例如，“[a-z]”可以匹配“a”到“z”范围内的任意小写字母字符。注意:只有连字符在字符组内部时,并且出现在两个字符之间时,才能表示字符的范围; 如果出字符组的开头,则只能表示连字符本身.</td>
+</tr>
+<tr>
+<td align="center">[^a-z]</td>
+<td align="left">负值字符范围。匹配任何不在指定范围内的任意字符。例如，“[^a-z]”可以匹配任何不在“a”到“z”范围内的任意字符。</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td align="left">匹配一个单词边界，也就是指单词和空格间的位置（即正则表达式的“匹配”有两种概念，一种是匹配字符，一种是匹配位置，这里的\b就是匹配位置的）。例如，“er\b”可以匹配“never”中的“er”，但不能匹配“verb”中的“er”。</td>
+</tr>
+<tr>
+<td align="center">\B</td>
+<td align="left">匹配非单词边界。“er\B”能匹配“verb”中的“er”，但不能匹配“never”中的“er”。</td>
+</tr>
+<tr>
+<td align="center">\cx</td>
+<td align="left">匹配由x指明的控制字符。例如，\cM匹配一个Control-M或回车符。x的值必须为A-Z或a-z之一。否则，将c视为一个原义的“c”字符。</td>
+</tr>
+<tr>
+<td align="center">\d</td>
+<td align="left">匹配一个数字字符。等价于[0-9]。</td>
+</tr>
+<tr>
+<td align="center">\D</td>
+<td align="left">匹配一个非数字字符。等价于[^0-9]。</td>
+</tr>
+<tr>
+<td align="center">\f</td>
+<td align="left">匹配一个换页符。等价于\x0c和\cL。</td>
+</tr>
+<tr>
+<td align="center">\n</td>
+<td align="left">匹配一个换行符。等价于\x0a和\cJ。</td>
+</tr>
+<tr>
+<td align="center">\r</td>
+<td align="left">匹配一个回车符。等价于\x0d和\cM。</td>
+</tr>
+<tr>
+<td align="center">\s</td>
+<td align="left">匹配任何不可见字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td align="center">\S</td>
+<td align="left">匹配任何可见字符。等价于[^ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td align="center">\t</td>
+<td align="left">匹配一个制表符。等价于\x09和\cI。</td>
+</tr>
+<tr>
+<td align="center">\v</td>
+<td align="left">匹配一个垂直制表符。等价于\x0b和\cK。</td>
+</tr>
+<tr>
+<td align="center">\w</td>
+<td align="left">匹配包括下划线的任何单词字符。类似但不等价于“[A-Za-z0-9_]”，这里的”单词”字符使用Unicode字符集。</td>
+</tr>
+<tr>
+<td align="center">\W</td>
+<td align="left">匹配任何非单词字符。等价于“[^A-Za-z0-9_]”。</td>
+</tr>
+<tr>
+<td align="center">\xn</td>
+<td align="left">匹配n，其中n为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，“\x41”匹配“A”。“\x041”则等价于“\x04&amp;1”。正则表达式中可以使用ASCII编码。</td>
+</tr>
+<tr>
+<td align="center">\num</td>
+<td align="left">匹配num，其中num是一个正整数。对所获取的匹配的引用。例如，“(.)\1”匹配两个连续的相同字符。</td>
+</tr>
+<tr>
+<td align="center">\n</td>
+<td align="left">标识一个八进制转义值或一个向后引用。如果\n之前至少n个获取的子表达式，则n为向后引用。否则，如果n为八进制数字（0-7），则n为一个八进制转义值。</td>
+</tr>
+<tr>
+<td align="center">\nm</td>
+<td align="left">标识一个八进制转义值或一个向后引用。如果\nm之前至少有nm个获得子表达式，则nm为向后引用。如果\nm之前至少有n个获取，则n为一个后跟文字m的向后引用。如果前面的条件都不满足，若n和m均为八进制数字（0-7），则\nm将匹配八进制转义值nm。</td>
+</tr>
+<tr>
+<td align="center">\nml</td>
+<td align="left">如果n为八进制数字（0-7），且m和l均为八进制数字（0-7），则匹配八进制转义值nml。</td>
+</tr>
+<tr>
+<td align="center">\un</td>
+<td align="left">匹配n，其中n是一个用四个十六进制数字表示的Unicode字符。例如，\u00A9匹配版权符号（&copy;）。</td>
+</tr>
+<tr>
+<td align="center">&lt;\&gt;</td>
+<td align="left">匹配词（word）的开始（&lt;）和结束（&gt;）。例如正则表达式&lt;the&gt;能够匹配字符串”for the wise”中的”the”，但是不能匹配字符串”otherwise”中的”the”。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td align="center">\(\)</td>
+<td align="left">将 ( 和 ) 之间的表达式定义为“组”（group），并且将匹配这个表达式的字符保存到一个临时区域（一个正则表达式中最多可以保存9个），它们可以用 \1 到\9 的符号来引用。</td>
+</tr>
+<tr>
+<td align="center">&#124;</td>
+<td align="left">将两个匹配条件进行逻辑“或”（Or）运算。例如正则表达式(him&#124;her) 匹配”it belongs to him”和”it belongs to her”，但是不能匹配”it belongs to them.”。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="left">匹配1或多个正好在它之前的那个字符。例如正则表达式9+匹配9、99、999等。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="left">匹配0或1个正好在它之前的那个字符。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td align="center">{i} {i,j}</td>
+<td align="left">匹配指定数目的字符，这些字符是在它之前的表达式定义的。例如正则表达式A[0-9]{3} 能够匹配字符”A”后面跟着正好3个数字字符的串，例如A123、A348等，但是不匹配A1234。而正则表达式[0-9]{4,6} 匹配连续的任意4个、5个或者6个数字</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Regular-Expression/" rel="tag"># Regular Expression</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/28/MybatisGetInsertID/" rel="prev" title="Mybatis获取插入操作时的自增ID">
+      <i class="fa fa-chevron-left"></i> Mybatis获取插入操作时的自增ID
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/19/redisStudy/" rel="next" title="redis的学习过程">
+      redis的学习过程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-%E6%9D%A5%E8%87%AA%E7%99%BE%E5%BA%A6%E7%99%BE%E7%A7%91"><span class="nav-number">4.</span> <span class="nav-text">语法(来自百度百科)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

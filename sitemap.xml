@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://codingxiejun.cn/2019/01/11/HotDeployment/</loc>
-    
-    <lastmod>2019-06-11</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://codingxiejun.cn/2018/12/21/CAS/</loc>
     
     <lastmod>2018-12-21</lastmod>
@@ -193,7 +186,7 @@
   </url>
   
   <url>
-    <loc>https://codingxiejun.cn/tags/utils/</loc>
+    <loc>https://codingxiejun.cn/tags/Redis/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -207,14 +200,7 @@
   </url>
   
   <url>
-    <loc>https://codingxiejun.cn/tags/Redis/</loc>
-    <lastmod>2021-05-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codingxiejun.cn/tags/Regular-Expression/</loc>
+    <loc>https://codingxiejun.cn/tags/String/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -228,7 +214,7 @@
   </url>
   
   <url>
-    <loc>https://codingxiejun.cn/tags/String/</loc>
+    <loc>https://codingxiejun.cn/tags/Regular-Expression/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -242,13 +228,6 @@
   </url>
   
   <url>
-    <loc>https://codingxiejun.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2021-05-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://codingxiejun.cn/tags/Leetcode/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
@@ -256,14 +235,14 @@
   </url>
   
   <url>
-    <loc>https://codingxiejun.cn/tags/WebService/</loc>
+    <loc>https://codingxiejun.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://codingxiejun.cn/tags/jsp/</loc>
+    <loc>https://codingxiejun.cn/tags/WebService/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -284,7 +263,21 @@
   </url>
   
   <url>
+    <loc>https://codingxiejun.cn/tags/jsp/</loc>
+    <lastmod>2021-05-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://codingxiejun.cn/tags/springboot/</loc>
+    <lastmod>2021-05-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingxiejun.cn/tags/utils/</loc>
     <lastmod>2021-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,13 +291,6 @@
   </url>
   
 
-  
-  <url>
-    <loc>https://codingxiejun.cn/categories/Javaweb/</loc>
-    <lastmod>2021-05-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
   
   <url>
     <loc>https://codingxiejun.cn/categories/JavaWeb/</loc>

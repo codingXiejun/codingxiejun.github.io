@@ -23,14 +23,14 @@
   <meta name="description" content="不卑不亢，戒骄戒躁">
 <meta property="og:type" content="website">
 <meta property="og:title" content="codingXiejun&#39;s blog">
-<meta property="og:url" content="https://codingxiejun.github.io/categories/JavaWeb/index.html">
+<meta property="og:url" content="https://codingxiejun.github.io/categories/Javaweb/index.html">
 <meta property="og:site_name" content="codingXiejun&#39;s blog">
 <meta property="og:description" content="不卑不亢，戒骄戒躁">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="codingXiejun">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://codingxiejun.github.io/categories/JavaWeb/">
+<link rel="canonical" href="https://codingxiejun.github.io/categories/Javaweb/">
 
 
 <script id="page-configurations">
@@ -43,7 +43,7 @@
   };
 </script>
 
-  <title>分类: JavaWeb | codingXiejun's blog</title>
+  <title>分类: Javaweb | codingXiejun's blog</title>
   
 
 
@@ -116,9 +116,39 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
   </ul>
@@ -151,14 +181,14 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <h2 class="collection-header">JavaWeb
+        <h2 class="collection-header">Javaweb
           <small>分类</small>
         </h2>
       </div>
 
       
     <div class="collection-year">
-      <span class="collection-header">2018</span>
+      <span class="collection-header">2019</span>
     </div>
 
   <article itemscope itemtype="http://schema.org/Article">
@@ -166,154 +196,195 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2018-12-13T13:59:16+08:00"
-              content="2018-12-13">
-          12-13
+              datetime="2019-01-11T10:13:09Z"
+              content="2019-01-11">
+          01-11
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/12/13/Jedis/" itemprop="url">
-            <span itemprop="name">Jedis的简单使用</span>
+          <a class="post-title-link" href="/2019/01/11/HotDeployment/" itemprop="url">
+            <span itemprop="name">SpringBoot之热部署</span>
           </a>
       </div>
 
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    </div>
+  </div>
+  
+  
+  
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-12-11T10:52:18+08:00"
-              content="2018-12-11">
-          12-11
-        </time>
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">codingXiejun</p>
+  <div class="site-description" itemprop="description">不卑不亢，戒骄戒躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/12/11/WebService/" itemprop="url">
-            <span itemprop="name">学习WebService</span>
-          </a>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
       </div>
+    </main>
 
-    </header>
-  </article>
+    <footer class="footer">
+      <div class="footer-inner">
+        
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-09-19T18:45:10+08:00"
-              content="2018-09-19">
-          09-19
-        </time>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codingXiejun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
       </div>
+    </footer>
+  </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/09/19/redisStudy/" itemprop="url">
-            <span itemprop="name">redis的学习过程</span>
-          </a>
-      </div>
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-    </header>
-  </article>
+<script src="/js/utils.js"></script>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<script src="/js/motion.js"></script>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-05-28T19:47:21+08:00"
-              content="2018-05-28">
-          05-28
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/05/28/MybatisGetInsertID/" itemprop="url">
-            <span itemprop="name">Mybatis获取插入操作时的自增ID</span>
-          </a>
-      </div>
+<script src="/js/schemes/muse.js"></script>
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<script src="/js/next-boot.js"></script>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-05-21T16:10:24+08:00"
-              content="2018-05-21">
-          05-21
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/05/21/MybatisParamsSearch/" itemprop="url">
-            <span itemprop="name">Mybatis多参数查询</span>
-          </a>
-      </div>
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-03-09T17:51:13+08:00"
-              content="2018-03-09">
-          03-09
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/03/09/springboot-mybatis/" itemprop="url">
-            <span itemprop="name">SpringBoot——整合Mybatis</span>
-          </a>
-      </div>
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-02-06T14:51:13+08:00"
-              content="2018-02-06">
-          02-06
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/02/06/springboot-first/" itemprop="url">
-            <span itemprop="name">SpringBoot——Hello SpringBoot</span>
-          </a>
-      </div>
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-01-25T17:09:57+08:00"
-              content="2018-01-25">
-          01-25
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/01/25/ssm/" itemprop="url">
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+/" itemprop="url">
             <span itemprop="name">基于SSM框架的管理系统</span>
           </a>
       </div>
@@ -329,14 +400,14 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2017-11-06T22:25:01+08:00"
+              datetime="2017-11-06T22:25:01Z"
               content="2017-11-06">
           11-06
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2017/11/06/mailProject/" itemprop="url">
+          <a class="post-title-link" href="/2017/11/07/mailProject/" itemprop="url">
             <span itemprop="name">javaWeb——邮件系统</span>
           </a>
       </div>
@@ -420,12 +491,16 @@
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
         <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">16</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>

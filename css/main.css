@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c6c4ff;
+  background: #ff0e13;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2445,4 +2445,21 @@ ul.breadcrumb li + li:last-child {
 }
 .links-of-blogroll-item {
   padding: 0;
+}
+body {
+  background: url("/images/kakaxi.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+.content-wrap {
+  opacity: 0.85;
+}
+.sidebar {
+  background: #eee;
+  opacity: 0.85;
+}
+.popup {
+  opacity: 0.85;
 }

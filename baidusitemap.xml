@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://codingxiejun.cn/2018/12/21/CAS/</loc>
-    <lastmod>2018-12-21</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/12/21/Transaction/</loc>
-    <lastmod>2018-12-21</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/12/19/HashMap/</loc>
-    <lastmod>2018-12-18</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/12/13/Jedis/</loc>
-    <lastmod>2018-12-13</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/09/20/redisStudy/</loc>
-    <lastmod>2018-12-12</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/12/11/WebService/</loc>
-    <lastmod>2018-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/05/29/MybatisGetInsertID/</loc>
-    <lastmod>2018-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2017/10/19/Thread-Basics/</loc>
-    <lastmod>2018-11-28</lastmod>
-  </url>
-  <url>
     <loc>https://codingxiejun.cn/2017/12/22/ThreeNumsAdd/</loc>
-    <lastmod>2018-11-23</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2017/11/07/mailProject/</loc>
     <lastmod>2018-11-23</lastmod>
   </url>
   <url>
@@ -45,36 +9,8 @@
     <lastmod>2018-11-22</lastmod>
   </url>
   <url>
-    <loc>https://codingxiejun.cn/2018/05/22/MybatisParamsSearch/</loc>
-    <lastmod>2018-11-21</lastmod>
-  </url>
-  <url>
     <loc>https://codingxiejun.cn/2018/08/21/RegularExpression/</loc>
     <lastmod>2018-11-21</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/01/26/ssm/</loc>
-    <lastmod>2018-11-20</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/03/10/springboot-mybatis/</loc>
-    <lastmod>2018-11-19</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2018/02/06/springboot-first/</loc>
-    <lastmod>2018-11-19</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2017/11/22/StringCantChange/</loc>
-    <lastmod>2018-11-12</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2017/08/27/hello-world/</loc>
-    <lastmod>2018-11-08</lastmod>
-  </url>
-  <url>
-    <loc>https://codingxiejun.cn/2017/10/02/String-s-found/</loc>
-    <lastmod>2018-11-07</lastmod>
   </url>
   <url>
     <loc>https://codingxiejun.cn/2017/12/01/leetcode22/</loc>

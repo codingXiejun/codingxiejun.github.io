@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://codingxiejun.cn/2021/03/10/ITIL/</loc>
+    
+    <lastmod>2021-05-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://codingxiejun.cn/2017/12/22/ThreeNumsAdd/</loc>
     
     <lastmod>2018-11-23</lastmod>
@@ -75,6 +82,13 @@
   
   <url>
     <loc>https://codingxiejun.cn/tags/Regular-Expression/</loc>
+    <lastmod>2021-05-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codingxiejun.cn/tags/ITIL/</loc>
     <lastmod>2021-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
